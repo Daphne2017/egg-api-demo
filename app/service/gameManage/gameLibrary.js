@@ -36,7 +36,7 @@ class gameLibraryService extends Service {
           model: this.app.model.GameGameTag,
           as: 'associateTags',
           attributes: [[ 'tag_id', 'id' ]],
-          raw: true, // raw这个属性暂时还没有太理解
+          // raw: true, // {raw: true}将Finder 捞出的user 资料全部转为plain object，即最基本单纯的JavaScript object 物件，不包含User model 所定义的方法 // 相对于{ raw: true }，toJSON()则可自己选择将哪一层资料转成plain object，例如：user.toJSON()
           include: [
             {
               model: this.app.model.GameTags, // 获取标签信息

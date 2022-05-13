@@ -11,9 +11,11 @@
 
 'use strict'
 module.exports = (options, app) => {
+  console.log(444444444, this)
+  const that = this
   return async function responseTime(ctx, next) {
     app.logger.info('[egg-static] mount as static root applogger')
-
+    console.log(555555, this)
     const start = Date.now()
     await next()
     const cost = Date.now() - start

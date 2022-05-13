@@ -24,16 +24,9 @@ module.exports = app => {
       field: 'related_game_count',
       defaultValue: 0,
     },
-    createdAt: {
-      type: DATE,
-      comment: '创建时间',
-      field: 'created_at',
-    },
-    updatedAt: {
-      type: DATE,
-      comment: '更新时间',
-      field: 'updated_at',
-    },
+  },
+  {
+    timestamps: true, // 自动维护时间戳 [ created_at、updated_at ]
   })
   return GameTags
 }

@@ -10,17 +10,12 @@ module.exports = {
         primaryKey: true,
         autoIncrement: true,
       },
-      w_id: {
-        type: STRING,
-        allowNull: false,
-        comment: '企业微信ID',
-      },
       username: {
         type: STRING(30),
         comment: '用户登录名',
       },
       password: {
-        type: STRING,
+        type: STRING(255),
         comment: '用户登录密码',
       },
       is_admin: {
@@ -29,11 +24,17 @@ module.exports = {
         defaultValue: false,
         comment: '是否为管理员',
       },
+      role: {
+        type: STRING(50),
+        allowNull: false,
+        defaultValue: true,
+        comment: '账号角色',
+      },
       status: {
         type: BOOLEAN,
         allowNull: false,
         defaultValue: true,
-        comment: '账号状态。禁用：0，正常：1',
+        comment: '账号状态',
       },
       created_at: {
         type: DATE,

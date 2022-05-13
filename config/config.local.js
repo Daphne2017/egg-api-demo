@@ -9,13 +9,13 @@ const mysqlConfigMap = {
     host: '127.0.0.1',
     port: 3306,
   },
-  alpha: {
+  gray: {
     username: 'root',
     password: '123456',
     host: '127.0.0.1',
     port: 3306,
   },
-  tmp: {
+  product: {
     username: 'root',
     password: '123456',
     host: '127.0.0.1',
@@ -27,36 +27,25 @@ const dataBaseMap = {
   local: {
     database: 'egg_dev',
   },
-  alpha: {
-    database: 'huoxing',
+  gray: {
+    database: 'egg_gray',
   },
-  tmp: {
-    database: 'hx_game_tmp',
-  },
-}
-
-const dataBaseLogMap = {
-  local: {
-    database: 'huoxing_log',
-  },
-  alpha: {
-    database: 'huoxing_log',
-  },
-  tmp: {
-    database: 'hx_game_log_tmp',
+  product: {
+    database: 'egg_product',
   },
 }
 
 const mysqlBaseConfig = {
   dialect: 'mysql',
   ...mysqlConfigMap[nowMode],
-  timezone: '+08:00',
+  timezone: '+08:00', // 保存为本地时区
   define: {
+    // query: { raw: true },  -------------------这里
     freezeTableName: true, // 防止修改表名为复数
-    underscored: true, // 防止驼峰式字段被默认转为下划线
+    underscored: true, // underscored: true, 不使用驼峰样式自动添加属性，而是下划线样式 [ createdAt => created_at ]
   },
 }
-// 数据库的配置
+// 数据库的配置，兼容多个库
 module.exports = () => {
   return {
     sequelize: {
@@ -64,11 +53,6 @@ module.exports = () => {
         delegate: 'model',
         baseDir: 'model',
         ...dataBaseMap[nowMode],
-        ...mysqlBaseConfig,
-      }, {
-        delegate: 'modelLog',
-        baseDir: 'model_log',
-        ...dataBaseLogMap[nowMode],
         ...mysqlBaseConfig,
       }],
     },

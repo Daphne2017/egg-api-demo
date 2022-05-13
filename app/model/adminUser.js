@@ -32,6 +32,7 @@ module.exports = app => {
       type: INTEGER,
       allowNull: false,
       defaultValue: 0,
+      field: 'is_admin',
       comment: '是否为管理员',
     },
     status: {
@@ -50,6 +51,10 @@ module.exports = app => {
     },
   }, {
     alter: true,
+    timestamps: true, // 自动维护时间戳 [ created_at、updated_at ]
+    // 禁止修改表名，默认情况下，sequelize将自动将所有传递的模型名称（define的第一个参数）转换为复数
+    // 但是为了安全着想，复数的转换可能会发生变化，所以禁止该行为
+    freezeTableName: true,
   })
   AdminUser.associate = function() {
     this.hasMany(app.model.UserRole, { foreignKey: 'code', sourceKey: 'role', as: 'roles' })

@@ -26,7 +26,7 @@ module.exports = app => {
     },
   },
   {
-    timestamps: false,
+    timestamps: false, // 无需维护时间戳
     indexes: [
       {
         name: 'tag_sort',
