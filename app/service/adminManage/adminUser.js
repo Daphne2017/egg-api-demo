@@ -11,7 +11,7 @@ class adminUserService extends Service {
    * @return {array | object} 返回用户Model实例数组或对象
    */
   async find(attributes, where, onlyOne) {
-    const attr = attributes || [ 'id', 'username', 'role' ]
+    const attr = attributes || [ 'id', 'username' ]
     const methodName = onlyOne ? 'findOne' : 'findAll'
 
     return await this.ctx.model.AdminUser[methodName]({
@@ -71,7 +71,7 @@ class adminUserService extends Service {
         username: fields.username,
       },
     })
-    if (user) throw new Error('用户名已存在')
+    if (user) throw new Error('用户名已存在', 11111)
     return await this.ctx.model.AdminUser.create(fields)
   }
   // 用户修改角色

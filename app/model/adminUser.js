@@ -5,7 +5,6 @@ module.exports = app => {
   const { INTEGER, STRING, BOOLEAN, DATE } = app.Sequelize
 
   const AdminUser = app.model.define('admin_users', {
-    // 其他诸如：姓名、头像、手机之类的信息，直接从企业微信API获取
     id: {
       type: INTEGER,
       primaryKey: true,
@@ -23,11 +22,6 @@ module.exports = app => {
       },
       comment: '用户登录密码',
     },
-    role: {
-      type: STRING(50),
-      defaultValue: 'test',
-      allowNull: false,
-    },
     isAdmin: {
       type: INTEGER,
       allowNull: false,
@@ -41,14 +35,6 @@ module.exports = app => {
       defaultValue: true,
       comment: '账号状态。禁用：0，正常：1',
     },
-    createdAt: {
-      type: DATE,
-      comment: '数据创建时间',
-    },
-    updatedAt: {
-      type: DATE,
-      comment: '数据更新时间',
-    },
   }, {
     alter: true,
     timestamps: true, // 自动维护时间戳 [ created_at、updated_at ]
@@ -56,8 +42,5 @@ module.exports = app => {
     // 但是为了安全着想，复数的转换可能会发生变化，所以禁止该行为
     freezeTableName: true,
   })
-  AdminUser.associate = function() {
-    this.hasMany(app.model.UserRole, { foreignKey: 'code', sourceKey: 'role', as: 'roles' })
-  }
   return AdminUser
 }

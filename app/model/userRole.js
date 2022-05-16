@@ -38,8 +38,5 @@ module.exports = app => {
   }, {
     alter: true,
   })
-  UserRole.associate = function() {
-    this.belongsTo(app.model.AdminUser, { foreignKey: 'code', targetKey: 'role', as: 'users' })
-  }
   return UserRole
 }

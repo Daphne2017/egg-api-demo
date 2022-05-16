@@ -45,8 +45,8 @@ module.exports = appInfo => {
       sameSite: false,
     },
     logger: {
-      level: 'INFO', //  日志记录级别
-      consoleLevel: 'DEBUG',
+      level: 'INFO', //  设置输出到日志文件的日志级别
+      consoleLevel: 'DEBUG', // 输出到终端的日志级别
     },
     // https://github.com/eggjs/egg-security#options // 更多配置
     // 服务端无法接受post请求，并且前台报错403 ，服务端自动返回信息：message: 'invalid csrf token'。
@@ -69,11 +69,38 @@ module.exports = appInfo => {
     jwt: {
       secret: 'nJJU8hrfdepHGy8b78', // 用户鉴权用的，自定义 token 的加密条件字符串
       expiresIn: '7d', // 配置默认过期时间
-      ignore: [ /^.*(\/register|\/login|\/logout|\/register\/upload|\/common\/statistics|\/nunjucks|\/restfulApiFruits).*$/ ], // 忽略需要token验证的路由
+      ignore: [ /^.*(\/register|\/login|\/logout|\/register|\/nunjucks|\/restfulApiFruits).*$/ ], // 忽略需要token验证的路由
       enable: true, // 默认是不启用
     },
+    /**
+     * 全局错误处理，用来应付没考虑到的异常。
+     * 常见的业务异常,需要需要手动去捕获，比如参数缺失，格式不对，等等。
+     * 全局这里先简单处理，后续有需要再完善。
+     */
+    onerror: {
+      html(err, ctx) {
+        ctx.logger.error(err)
+        ctx.body = ctx.body || `<div style="font-size: 30px;">${err.message}</div>`
+        ctx.status = ctx.status || 500
+      },
+      json(err, ctx) {
+        const isSequelize = err.name.includes('Sequelize') // 针对数据库错误进行判断
+        ctx.logger.error(err)
+        ctx.body = {
+          code: err.code || '500',
+          msg: isSequelize && '数据库错误' || err.message,
+          error: isSequelize && err.message || err.info || '系统错误，请联系管理员。',
+        }
+        ctx.status = err.status || 500
+      },
+      text(err, ctx) {
+        ctx.logger.error(err)
+        ctx.body = err.message
+        ctx.status = 500
+      },
+    },
     // 自定义日志
-    customLogger: { // 设置自定义日志与requestLog中间件关联
+    customLogger: { //
       reqLogger: {
         file: path.join(appInfo.root, `logs/${appInfo.name}/request.log`),
         contextFormatter(meta) {

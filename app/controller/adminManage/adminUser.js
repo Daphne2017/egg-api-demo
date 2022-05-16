@@ -8,13 +8,24 @@ class adminUserController extends Controller {
    */
   async getUserInfo() {
     const userId = this.user.id
+
+    const userAuthCodeList = await this.ctx.service.adminManage.adminPrivilege.getAuthCode(userId)
+
+    userAuthCodeList.push('dashboard') // 通用code
+    console.log(111111111, this.user)
+    if (this.user.isAdmin) {
+      userAuthCodeList.push('admin') // 判断是管理员，增加管理员code
+    }
+
+
     // 后期可添加更多用户字段
-    const userInfo = await this.ctx.service.adminManage.adminUser.find(null, { id: userId }, true)
+    // const userInfo = await this.ctx.service.adminManage.adminUser.find(null, { id: userId }, true)
     const data = {
       id: userId,
       name: this.user.username,
       avatar: 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif',
-      roles: userInfo.role.split(','),
+      // roles: userInfo.role.split(','),
+      roles: userAuthCodeList,
       introduction: 'I am a super administrator',
     }
     this.success({ data })
