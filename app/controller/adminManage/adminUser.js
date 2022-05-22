@@ -11,10 +11,9 @@ class adminUserController extends Controller {
 
     const userAuthCodeList = await this.ctx.service.adminManage.adminPrivilege.getAuthCode(userId)
 
-    userAuthCodeList.push('dashboard') // 通用code
-    console.log(111111111, this.user)
+    userAuthCodeList.push('dashboard') // 所有用户的通用code
     if (this.user.isAdmin) {
-      userAuthCodeList.push('admin') // 判断是管理员，增加管理员code
+      userAuthCodeList.push('admin') // 判断是管理员，增加管理员code，管理员拥有所有菜单权限
     }
 
 

@@ -18,7 +18,7 @@ class adminPrivilegeController extends baseController {
       item.privilege_operation = isEnabled ? isEnabled.privilege_operation : item.menu_code === 'dashboard' ? 'enabled' : 'disabled' // dashboard的首页默认用户都拥有权限
       return item
     })
-    this.success({ data: app.utils.index.toTreeJson({ data, prop: 'menu_id', parentProp: 'menu_parent' }) })
+    this.success({ old: data, data: app.utils.index.toTreeJson({ data, prop: 'menu_id', parentProp: 'menu_parent' }) })
   }
 
   /**

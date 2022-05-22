@@ -4,7 +4,7 @@ const Service = require('egg').Service
 
 class adminPrivilegeService extends Service {
   /**
-   * 获取用户的权限code
+   * 获取用户的菜单权限code
    * @param { Number } userId 用户id
    * @return { Array } 用户权限数组
    */
@@ -17,7 +17,7 @@ class adminPrivilegeService extends Service {
         where: { is_visible: true },
       }],
       where: {
-        privilege_master_value: userId,
+        privilege_master_value: userId, // 用户ID
         privilege_operation: 'enabled',
       },
     })
