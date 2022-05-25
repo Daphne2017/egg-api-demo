@@ -47,12 +47,6 @@ module.exports = {
         comment: '用户列表',
       },
     )
-    await queryInterface.addColumn('admin_users', 'email', {
-      type: Sequelize.STRING,
-      comment: '邮箱',
-    }, {
-      after: 'password',
-    })
   },
 
   down: async queryInterface => {
