@@ -1,48 +1,36 @@
 # 简介
 - https://www.eggjs.org/zh-CN/core
 Node服务层
-# 开发
+## 关于启动项目
 
-安装依赖 
+本机安装好 MySQL，并启动本地MySQL，数据库可视化工具推荐使用 dataGrip
+数据库名：egg_dev，端口号3306，账号密码：root/123456
 ```bash
+install mysql
+services start mysql
+// 或者
+mysqld
+
+```
+安装redis，因为项目使用了redis，所以需要安装
+```bash
+brew install redis
+redis-server
+```
+安装依赖
+```bash
+git pull origin xxx
 npm install
+npx sequelize db:migrate // 执行数据库Migrate，此步骤会在数据库中自动创建表
+npm run dev
+open http://localhost:7001/
 ```
-
-```bash
-$ npm i
-$ npm run dev
-$ open http://localhost:7001/
-```
-
-执行数据库Migrate
-```bash
-$ npx sequelize db:migrate
-```
-
-# 规范
-
-## 关于 Node 版本
-node版本为：17.7.1
-
-## 关于代码规范
-由于 Node 上暂时没找到很好的实时检测工具，所以建议直接安装 VS Code 的插件：[ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
 
 ## 关于数据库
-- 为避免冲突，本地数据库配置，统一为
-```json
-"username": "root",
-"password": "123456",
-"database": "egg_dev",
-"host": "127.0.0.1",
-"dialect": "mysql",
-```
-- 数据库 ORM 框架，使用 [Sequelize](https://eggjs.org/zh-cn/tutorials/sequelize.html)；
-- 数据库表的维护，使用 [Migration](https://eggjs.org/zh-cn/tutorials/sequelize.html) 管理；
-- 新增数据表、数据表结构变更，一律使用 Migration 的方式进行，方便进行数据表结构的版本控制；
-- 禁止：手动修改表结构、新建表、删除表；
-
+- 数据库 ORM 框架，使用 [Sequelize](https://eggjs.org/zh-cn/tutorials/sequelize.html)；
+- 数据库表的维护，使用 [Migration](https://eggjs.org/zh-cn/tutorials/sequelize.html) 管理；
+- 新增数据表、数据表结构变更，官网建议使用 Migration 的方式进行，方便进行数据表结构的版本控制；（[sequelize 数据库迁移命令 migrations](https://link.zhihu.com/?target=https%3A//blog.tcs-y.com/2020/05/14/sequelize-migrations/)）
 ## 关于分层架构
-
 ### 请求流向
 Router -> Controller -> Service -> Model
 
@@ -53,7 +41,7 @@ Router -> Controller -> Service -> Model
 [控制器](https://eggjs.org/zh-cn/basics/controller.html)。和路由层直接交互，负责接受路由信息，解析用户的输入，调用相关的 Service，并把结果返回给用户。
 
 ### Service
-[服务](https://eggjs.org/zh-cn/basics/service.html)。直接和 Model 层，或者第三方服务交互，也可以提供一些聚合的服务，或处理复杂的业务逻辑。
+[服务](https://eggjs.org/zh-cn/basics/service.html)。直接和 Model 层，或者第三方服务交互，或处理复杂的业务逻辑。
 
 ### Model
 [持久层](https://eggjs.org/zh-cn/tutorials/sequelize.html)。定义数据库表的映射，提供数据库操作框架，为 Service 服务。
@@ -86,11 +74,10 @@ npx sequelize db:migrate
 定义接口路由，调用相关 Controller。
 
 # 参考资料
-- 更多关于 Egg.js 的使用姿势，参考[官方指南](https://eggjs.org/zh-cn/intro/)；
-- sequelize 参考[官方指南](https://sequelize.org/)；
-- https://sequelize.org/
-- https://www.sequelize.com.cn/
-- https://www.bookstack.cn/read/sequelize-orm-v6-zh/e6d4ca7634926bb3.md
-- https://itbilu.com/nodejs/npm/sequelize-docs-v5.html
+
+- Egg.js [官方指南](https://eggjs.org/zh-cn/intro/)；
+- [sequelize英文文档](https://sequelize.org/)
+- [sequelize中文文档](https://www.sequelize.com.cn/)
+- **[Sequelize ORM v6 中文文档](https://www.bookstack.cn/read/sequelize-orm-v6-zh/e6d4ca7634926bb3.md)**
 - https://github.com/demopark/sequelize-docs-Zh-CN
-- http://www.junyao.tech/posts/f8b4d511.html
+- ****[基于Egg框架应用Sequelize操作MySQL总结](https://zhuanlan.zhihu.com/p/361698483)****

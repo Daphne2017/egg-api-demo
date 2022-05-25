@@ -60,7 +60,7 @@ module.exports = appInfo => {
       // 允许访问接口的白名单
       // domainWhiteList: [ 'http://127.0.0.1:9527/' ],
     },
-    cors: { // 设置允许跨域
+    cors: { // 设置允许跨域，否则前端无法请求
       origin: '*',
       // credentials: true,
       allowMethods: 'OPTIONS,GET,HEAD,PUT,POST,DELETE,PATCH',

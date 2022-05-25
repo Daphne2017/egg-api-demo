@@ -21,7 +21,7 @@ const dataBaseMap = {
 
 const dataBaseLogMap = {
   local: {
-    database: 'huoxing_log',
+    database: 'extra_egg_dev',
   },
 
 }
@@ -40,7 +40,7 @@ const mysqlBaseConfig = {
 // 数据库的配置
 module.exports = () => {
   return {
-    sequelize: {
+    sequelize: { // 这里可以设置多个数据库链接
       datasources: [{
         delegate: 'model',
         baseDir: 'model',
