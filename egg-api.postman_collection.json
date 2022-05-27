@@ -1,0 +1,381 @@
+{
+	"info": {
+		"_postman_id": "1b76020f-dc85-42ac-a467-15fe8a33f153",
+		"name": "egg-api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16487127"
+	},
+	"item": [
+		{
+			"name": "gameManage",
+			"item": [
+				{
+					"name": "获取游戏列表",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:7001/gameManagement/gameLibraryList",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "7001",
+							"path": [
+								"gameManagement",
+								"gameLibraryList"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "新增游戏",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "gameName",
+									"value": "postman测试的数据",
+									"type": "text"
+								},
+								{
+									"key": "gameIcon",
+									"value": "postman测试的数据gameIcon",
+									"type": "text"
+								},
+								{
+									"key": "simpleDesc",
+									"value": "postman测试的数据simpleDesc",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:7001/gameManagement/gameLibrary/add",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "7001",
+							"path": [
+								"gameManagement",
+								"gameLibrary",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "修改游戏",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "gameName",
+									"value": "postman测试的数据已修改",
+									"type": "text"
+								},
+								{
+									"key": "gameIcon",
+									"value": "postman测试的数据gameIcon已修改",
+									"type": "text"
+								},
+								{
+									"key": "simpleDesc",
+									"value": "simpleDesc已修改",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:7001/gameManagement/gameLibrary/edit/:id",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "7001",
+							"path": [
+								"gameManagement",
+								"gameLibrary",
+								"edit",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "108"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "根据gameId获取关联的标签",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:7001/gameManagement/gameLibraryList/getRelatedTagsBygameId/:gameId",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "7001",
+							"path": [
+								"gameManagement",
+								"gameLibraryList",
+								"getRelatedTagsBygameId",
+								":gameId"
+							],
+							"variable": [
+								{
+									"key": "gameId",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "tagManage",
+			"item": [
+				{
+					"name": "获取标签列表",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:7001/tagManagement/tagLibraryList",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "7001",
+							"path": [
+								"tagManagement",
+								"tagLibraryList"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "新增标签",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "tagName",
+									"value": "post新增的标签",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:7001/tagManagement/tagLibraryList/add",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "7001",
+							"path": [
+								"tagManagement",
+								"tagLibraryList",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "修改标签名称",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "tagName",
+									"value": "修改标签名称",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:7001/tagManagement/tagLibraryList/edit/:id",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "7001",
+							"path": [
+								"tagManagement",
+								"tagLibraryList",
+								"edit",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "15"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "通过tagId获取关联游戏",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:7001/tagManagement/tagLibraryList/getRelatedGameByTagId/:tagId",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "7001",
+							"path": [
+								"tagManagement",
+								"tagLibraryList",
+								"getRelatedGameByTagId",
+								":tagId"
+							],
+							"variable": [
+								{
+									"key": "tagId",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "登陆获取token",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "username",
+							"value": "18819164274",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "huoxing2020",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:7001/login?username=18819164274&password=huoxing2020",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "7001",
+					"path": [
+						"login"
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "18819164274"
+						},
+						{
+							"key": "password",
+							"value": "huoxing2020"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "进入首页",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTksIndfaWQiOiJaaG91SHVhbiIsInVzZXJuYW1lIjoiMTg4MTkxNjQyNzQiLCJpc19hZG1pbiI6dHJ1ZSwiaWF0IjoxNjQ2ODg1NzI1LCJleHAiOjE2NDc0OTA1MjV9.YIuUSBiDOUtMfyri1A5jNp1-d5D3w-fam3KvQr6BfdQ",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:7001/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "7001",
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Request",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	]
+}

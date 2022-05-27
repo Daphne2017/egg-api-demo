@@ -1,6 +1,10 @@
 # 简介
-- https://www.eggjs.org/zh-CN/core
-Node服务层
+## Node后台服务端
+- 技术栈：Nodejs+Eggjs+Mysql+Redis
+- 数据库导入[egg_dev.sql](./egg_dev.sql)文件
+- 接口文档都在[egg-api.postman_collection.json](./egg-api.postman_collection.json)文件，导入到postman即可
+- 管理员用户账号密码：admin/123456
+- 其他配置参考eggjs文档[https://www.eggjs.org/zh-CN/core](https://www.eggjs.org/zh-CN/core)
 ## 关于启动项目
 
 本机安装好 MySQL，并启动本地MySQL，数据库可视化工具推荐使用 dataGrip
