@@ -1,7 +1,7 @@
 
 'use strict'
 const Service = require('egg').Service
-class gameLibraryService extends Service {
+class gamesService extends Service {
   constructor(prop) {
     super(prop)
     // 游戏状态态
@@ -182,4 +182,4 @@ class gameLibraryService extends Service {
   }
 }
 
-module.exports = gameLibraryService
+module.exports = gamesService

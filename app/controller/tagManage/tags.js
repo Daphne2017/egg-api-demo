@@ -2,7 +2,7 @@
 
 const baseController = require('../baseController')
 
-class tagLibraryController extends baseController {
+class tagsController extends baseController {
   /**
    * @param { Boolean } isExport 当前是否导出
    * @return {Promise} 接口返回的Promise对象
@@ -12,7 +12,7 @@ class tagLibraryController extends baseController {
     const { col, sort } = this.app.utils.index.returnObject(order)
     const orderArr = [[ col || 'id', sort || 'DESC' ]]
     const pageOb = !isExport ? { limit, offset } : {}
-    const { list, total } = await this.service.tagManage.tagLibrary.getTagList({ pageOb, orderArr, tagName })
+    const { list, total } = await this.service.tagManage.tags.getTagList({ pageOb, orderArr, tagName })
     return { data: { list, total } }
   }
   /**
@@ -34,8 +34,8 @@ class tagLibraryController extends baseController {
     const { tagName, relatedGameCount } = ctx.request.body
     const body = { tagName, relatedGameCount }
     try {
-      const res = !id ? await service.tagManage.tagLibrary.addTag(body)
-        : await service.tagManage.tagLibrary.updateTag(id, body) // 更新标签关联游戏数字段值
+      const res = !id ? await service.tagManage.tags.addTag(body)
+        : await service.tagManage.tags.updateTag(id, body) // 更新标签关联游戏数字段值
       this.success({ data: res })
     } catch (error) {
       ctx.onerror(error)
@@ -63,7 +63,7 @@ class tagLibraryController extends baseController {
    */
   async getRelatedGamesByTagId() {
     const tagId = Number(this.ctx.params.tagId)
-    const list = await this.service.tagManage.tagLibrary.getRelatedGamesByTagId(tagId)
+    const list = await this.service.tagManage.tags.getRelatedGamesByTagId(tagId)
     const listData = list.map(node => {
       const itemList = node.toJSON()
       const { gameData, ...rest } = itemList
@@ -74,4 +74,4 @@ class tagLibraryController extends baseController {
   }
 }
 
-module.exports = tagLibraryController
+module.exports = tagsController

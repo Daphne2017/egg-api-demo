@@ -2,7 +2,7 @@
 
 const baseController = require('../baseController')
 
-class tagLibraryController extends baseController {
+class tagsController extends baseController {
   /**
    * @param { Boolean } isExport 当前是否导出
    * @return {Promise} 接口返回的Promise对象
@@ -60,4 +60,4 @@ class tagLibraryController extends baseController {
   }
 }
 
-module.exports = tagLibraryController
+module.exports = tagsController

@@ -6,6 +6,10 @@ module.exports = {
   // static: {
   //   enable: true,
   // }
+  routerPlus: {
+    enable: true,
+    package: 'egg-router-plus',
+  },
   jwt: {
     enable: true,
     package: 'egg-jwt', // 开启token校验

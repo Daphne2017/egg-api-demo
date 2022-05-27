@@ -1,7 +1,7 @@
 'use strict'
 const baseController = require('../baseController')
 
-class gameLibraryController extends baseController {
+class gamesController extends baseController {
   constructor(prop) {
     super(prop)
     // 游戏状态态
@@ -24,7 +24,7 @@ class gameLibraryController extends baseController {
     const orderArr = [[ col || 'id', sort || 'DESC' ]] // 排序条件查询
     console.log('ctx.request.query', this.paginationDeal(ctx.request.query))
 
-    let { list, total } = await this.service.gameManage.gameLibrary.getGamesList({ pageObj, gameName, filterObj, orderArr })
+    let { list, total } = await this.service.gameManage.games.getGamesList({ pageObj, gameName, filterObj, orderArr })
     list = await this.gameDataFlat(list) // 是否对返回的数据进行处理
     return { data: { list, total } }
   }
@@ -37,12 +37,12 @@ class gameLibraryController extends baseController {
     // if (allGames) { console.log('存在redis缓存') }
     // if (!allGames) {
     //   console.log('没有redis缓存')
-    //   allGames = await service.gameManage.gameLibrary.getAllGames()
+    //   allGames = await service.gameManage.games.getAllGames()
     //   await this.ctx.service.redis.set('allGames', allGames, 60 * 60)
     // }
 
     console.log('没有redis缓存')
-    const allGames = await service.gameManage.gameLibrary.getAllGames()
+    const allGames = await service.gameManage.games.getAllGames()
     this.success({ data: allGames })
   }
   /**
@@ -73,7 +73,7 @@ class gameLibraryController extends baseController {
       putStatus: { require: true, type: 'number' },
     })
     const { putStatus } = this.ctx.request.body
-    const data = await this.service.gameManage.gameLibrary.updatePutStatus({ id, putStatus })
+    const data = await this.service.gameManage.games.updatePutStatus({ id, putStatus })
     this.success({ data })
   }
   /**
@@ -112,8 +112,8 @@ class gameLibraryController extends baseController {
     const transaction = await this.ctx.model.transaction()
     let res = null
     try {
-      res = !id ? await service.gameManage.gameLibrary.addGameSubmit({ ...rest }, transaction)
-        : await service.gameManage.gameLibrary.editGameSubmit(id, { ...rest }, transaction) // 新增 / 编辑
+      res = !id ? await service.gameManage.games.addGameSubmit({ ...rest }, transaction)
+        : await service.gameManage.games.editGameSubmit(id, { ...rest }, transaction) // 新增 / 编辑
       await Promise.all([
         this.updateAssociateTags(res.id || id, associateTags, transaction), // 更新游戏关联的标签
       ])
@@ -132,7 +132,7 @@ class gameLibraryController extends baseController {
   async getRelatedTagsBygameId() {
     console.log('getRelatedTagsBygameId')
     const gameId = Number(this.ctx.params.gameId)
-    const list = await this.service.gameManage.gameLibrary.getRelatedTagsBygameId(gameId)
+    const list = await this.service.gameManage.games.getRelatedTagsBygameId(gameId)
 
     this.success({ data: list })
   }
@@ -143,8 +143,8 @@ class gameLibraryController extends baseController {
    *  @param { object } transaction 事务对象
    */
   async updateAssociateTags(id, associateTags = [], transaction) {
-    await this.service.gameManage.gameLibrary.deleteAssociateTags(id, transaction) // 先删除已关联
-    await this.service.gameManage.gameLibrary.addAssociateTags(id, associateTags, transaction) // 重新插入
+    await this.service.gameManage.games.deleteAssociateTags(id, transaction) // 先删除已关联
+    await this.service.gameManage.games.addAssociateTags(id, associateTags, transaction) // 重新插入
   }
   /**
    *  更新标签关联游戏数related_game_count字段
@@ -155,8 +155,8 @@ class gameLibraryController extends baseController {
    */
   async updateTagRelatedGameCount({ associateTags = [], oldAssociateTags = [] }, transaction) {
     const unqueIdArr = [ ...new Set([ ...associateTags, ...oldAssociateTags ].map(item => item.id)) ] // 去除重复的tagid
-    const tagRelatedGamecountObj = await this.service.gameManage.gameLibrary.tagRelatedGameCount(unqueIdArr, transaction) // 分别统计新增/编辑时涉及到的标签所关联游戏数count
-    await this.service.gameManage.gameLibrary.updateTagRelatedGameCount(tagRelatedGamecountObj, transaction) // 更新标签库表中部分标签的related_game_count字段
+    const tagRelatedGamecountObj = await this.service.gameManage.games.tagRelatedGameCount(unqueIdArr, transaction) // 分别统计新增/编辑时涉及到的标签所关联游戏数count
+    await this.service.gameManage.games.updateTagRelatedGameCount(tagRelatedGamecountObj, transaction) // 更新标签库表中部分标签的related_game_count字段
   }
   /**
    * 处理前端发送的游戏参数
@@ -187,4 +187,4 @@ class gameLibraryController extends baseController {
 
 }
 
-module.exports = gameLibraryController
+module.exports = gamesController

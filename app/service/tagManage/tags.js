@@ -1,6 +1,6 @@
 'use strict'
 const Service = require('egg').Service
-class tagLibraryService extends Service {
+class tagsService extends Service {
   /**
    * 获取标签列表
    * @param { Object } body 查询条件数据对象
@@ -71,4 +71,4 @@ class tagLibraryService extends Service {
   }
 }
 
-module.exports = tagLibraryService
+module.exports = tagsService
