@@ -61,9 +61,9 @@ module.exports = appInfo => {
       // domainWhiteList: [ 'http://127.0.0.1:9527/' ],
     },
     cors: { // 设置允许跨域，否则前端不设置代理无法请求
-      // origin: '*',
+      origin: '*',
       // credentials: true,
-      // allowMethods: 'OPTIONS,GET,HEAD,PUT,POST,DELETE,PATCH',
+      allowMethods: 'OPTIONS,GET,HEAD,PUT,POST,DELETE,PATCH',
     },
     // "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTksIndfaWQiOiJaaG91SHVhbiIsInVzZXJuYW1lIjoiMTg4MTkxNjQyNzQiLCJpc19hZG1pbiI6dHJ1ZSwiaWF0IjoxNjQ0ODM0MDAzLCJleHAiOjE2NDU0Mzg4MDN9.Ekyziu52XPnuBeUv4WIX9wz1RkOA_diuB7fk5Oext1Y"
     jwt: {
